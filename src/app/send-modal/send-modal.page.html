@@ -9,12 +9,17 @@
 <ion-content padding>
 
   <ion-item>
+      <ion-label>From:</ion-label>
+      <ion-input [(ngModel)]="senderString" placeholder="Anonymous"></ion-input>
+  </ion-item>
+
+  <ion-item>
       <ion-input [(ngModel)]="messageString" placeholder="Message"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Arrival Date</ion-label>
-    <ion-datetime [(ngModel)]="datePicked" displayFormat="D MMM YYYY H:mm a"></ion-datetime>
+    <ion-datetime [(ngModel)]="datePicked" displayFormat="D MMM YYYY H:mm a" max="2050"></ion-datetime>
   </ion-item>
   
   <ion-item>

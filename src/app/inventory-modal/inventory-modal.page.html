@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title text-center>
+        Bottles Inventory
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-card *ngFor="let bottle of getBottles()">
+        <ion-card-content>
+          <img style="-webkit-user-select: none;" src="https://cdn.dribbble.com/users/330915/screenshots/3749740/1_b3.gif" style="width:250px;height:200px;" class="center">
+          <h2>From: {{ bottle.sender }}</h2>
+          <h3>Unlocks: {{ bottle.date | date : 'EEEE, MMM d, y, h:mm a'}}</h3>
+          
+          <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+              <ion-fab-button size="small" color="danger" (click)="unlockBottle(bottle)">
+                <ion-icon name="unlock"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+  
+        </ion-card-content>
+      </ion-card>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" (click)="addBottle()" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <ion-fab vertical="bottom" horizontal="start" (click)="dismiss()" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>

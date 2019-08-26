@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { SendModalPage } from '../send-modal/send-modal.page';
+import { InventoryModalPage } from '../inventory-modal/inventory-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,6 @@ export class HomePage {
   }
 
   async sendBottle(){
-    console.log("send bottle test")
-
     const modal = await this.modalController.create({
       component: SendModalPage,
       componentProps: { 
@@ -25,7 +24,22 @@ export class HomePage {
 
     modal.onDidDismiss()
       .then(() => {
-        //this.loadStudentDetails()
+    });
+    
+
+    await modal.present(); 
+  }
+
+  async openInventory(){
+    const modal = await this.modalController.create({
+      component: InventoryModalPage,
+      componentProps: { 
+      },
+      backdropDismiss: false
+    });
+
+    modal.onDidDismiss()
+      .then(() => {
     });
     
 

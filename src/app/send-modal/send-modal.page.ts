@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-send-modal',
@@ -10,14 +10,14 @@ export class SendModalPage implements OnInit {
 
   cipheredText: any;
   messageString: any;
+  senderString: any;
   datePicked: any;
 
-  constructor(public modalController: ModalController, public toastController: ToastController) {
+  constructor(public modalController: ModalController, public toastController: ToastController, public alertController: AlertController) {
 
    }
 
   ngOnInit() {
-    //this.cipheredText = "Bottle Code"
   }
 
   dismiss(){
@@ -25,23 +25,46 @@ export class SendModalPage implements OnInit {
   }
 
   cipher(){
-    var combinedMessage = this.messageString + '/d' + this.datePicked
-    console.log(combinedMessage)
+    var combinedMessage = this.senderString + '/sp' + this.messageString + '/sp' + this.datePicked
 
     var aesjs = require('aes-js');
     var key = [ 48, 43, 32, 12, 43, 76, 23, 73, 2, 69, 54, 94, 62, 35, 74, 82 ];
-    var textBytes = aesjs.utils.utf8.toBytes(this.messageString);
+    var textBytes = aesjs.utils.utf8.toBytes(combinedMessage);
     var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
     var encryptedBytes = aesCtr.encrypt(textBytes);
     var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-    console.log(encryptedHex);
     this.cipheredText = encryptedHex
 
   }
 
   async share(){
+
+    if(this.cipheredText == "" || this.messageString == "" || this.senderString == "" || this.datePicked == undefined){
+      const alert = await this.alertController.create({
+        header: 'Incomplete Bottle',
+        message: 'Please fill in all the fields in the message.',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+
+      return
+    }
+
+    let currentDate = new Date()
+    if (currentDate >= new Date(this.datePicked)){
+      const alert = await this.alertController.create({
+        header: 'Incorrect Date',
+        message: 'Please input a future date.',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+
+      return
+    }
+
     this.cipher()
-    //this.modalController.dismiss();
     
     let newNavigator: any;
     newNavigator = window.navigator;
