@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, AlertController } from '@ionic/angular';
 
+declare var require: any
+
 @Component({
   selector: 'app-send-modal',
   templateUrl: './send-modal.page.html',

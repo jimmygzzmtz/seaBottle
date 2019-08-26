@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
+declare var require: any
+
 @Component({
   selector: 'app-inventory-modal',
   templateUrl: './inventory-modal.page.html',
@@ -61,7 +63,7 @@ export class InventoryModalPage implements OnInit {
     
     let currentDate = new Date()
 
-    if (currentDate >= bottle.date){
+    if (currentDate >= new Date(bottle.date)){
       const alert = await this.alertController.create({
         header: 'Bottle',
         subHeader: 'From: ' + this.bottles[index].sender,
