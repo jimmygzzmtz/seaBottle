@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>
+      Send Bottle
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+      <ion-input [(ngModel)]="messageString" placeholder="Message"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Arrival Date</ion-label>
+    <ion-datetime [(ngModel)]="datePicked" displayFormat="D MMM YYYY H:mm a"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <p>{{cipheredText}}</p>
+  </ion-item>
+
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" (click)="share()" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="share"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-fab vertical="bottom" horizontal="start" (click)="dismiss()" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
